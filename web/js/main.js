@@ -4,10 +4,13 @@ var maquette = require("maquette");
 
 var h = maquette.h;
 
-function renderMaquette() {
-  return h("body", [
-    "TODO"
+var renderMaquette = function() {
+  return h.body([
+    h.p([
+      h.button(["Click me"]),
+      h.a.linkClass({href:"#"}, ["Link"])
+    ])
   ]);
-}
+};
 
 var projector = maquette.createProjector(document.body, renderMaquette);

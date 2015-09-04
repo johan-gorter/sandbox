@@ -12,7 +12,8 @@ var autoprefixer = require('autoprefixer-core');
 var postcss = require('gulp-postcss');
 var postcssNested = require('postcss-nested');
 var ghPages = require('gulp-gh-pages');
- 
+var compactDom = require('compact-dom');
+
 var reload = browserSync.reload;
 
 var BROWSERSYNC_PORT = parseInt(process.env.PORT) || 1111;
@@ -33,7 +34,11 @@ gulp.task('css', function() {
 });
 
 gulp.task('scripts', function() {
+  var compactDomToHyperscript = function(file, opts) {
+    return compactDom.toHyperscript.createStreamConverter({mithril: false});
+  };
   var bundler = browserify({
+    transform: compactDomToHyperscript,
     entries: ['./web/js/main.js'],
     debug: true
   });
