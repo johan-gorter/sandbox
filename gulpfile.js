@@ -13,6 +13,7 @@ var postcss = require('gulp-postcss');
 var postcssNested = require('postcss-nested');
 var ghPages = require('gulp-gh-pages');
 var compactDom = require('compact-dom');
+var gulpCompactDom = require('gulp-compact-dom');
 var tsify = require('tsify');
 
 var reload = browserSync.reload;
@@ -35,14 +36,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('scripts', function() {
-  var transformCompactDomToHyperscript = function(file, opts) {
-    return compactDom.toHyperscript.createStreamConverter({});
-  };
-  var convertCompactDomToHyperscript = function(file, opts) {
-    return compactDom.toHyperscript.createStreamConverter({});
-  };
   var bundler = browserify({
-//    transform: transformCompactDomToHyperscript,
     entries: ['./src/main.ts'],
     debug: true
   }).plugin(tsify, {typescript: require('typescript')});
@@ -52,7 +46,7 @@ gulp.task('scripts', function() {
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(sourcemaps.write('./'))
-    .pipe(convertCompactDomToHyperscript)
+    .pipe(gulpCompactDom.createToHyperscriptTranspiler({}))
     .pipe(gulp.dest('./build/web'))
     .pipe(reload({stream: true}));
 });
@@ -71,7 +65,7 @@ gulp.task('serve', ['default'], function() {
     server: 'build/web'
   });
 
-  gulp.watch('./web/src/**/*.ts', ['scripts']);
+  gulp.watch('./src/**/*.ts', ['scripts']);
   gulp.watch('./web/**/*.css', ['css']);
   gulp.watch('./web/**/*.html', ['html']);
 });

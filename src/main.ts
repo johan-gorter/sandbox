@@ -1,5 +1,5 @@
 ///<reference path="compact-dom-typings.d.ts" />
-///<reference path="typings/tsd.d.ts" />
+///<reference path="../typings/tsd.d.ts" />
 import * as maquette from "maquette";
 
 var h = maquette.h;

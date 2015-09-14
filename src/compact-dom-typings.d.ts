@@ -1,4 +1,4 @@
-///<reference path="typings/maquette/maquette.d.ts" />
+///<reference path="../typings/maquette/maquette.d.ts" />
 
 // Generated:
 interface CompactDomNode {
