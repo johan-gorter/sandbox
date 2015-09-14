@@ -17,17 +17,20 @@
   },
   "devDependencies": {
     "autoprefixer-core": "^5.1.9",
-    "browser-sync": "^1.9.0",
+    "browser-sync": "^2.9.3",
     "browserify": "^9.0.8",
     "compact-dom": "^0.2.0",
     "del": "^1.1.1",
-    "gulp": "^3.8.11",
+    "gulp": "^3.9.0",
     "gulp-gh-pages": "^0.5.1",
     "gulp-postcss": "^5.1.1",
     "gulp-sass": "^1.3.3",
     "gulp-sourcemaps": "^1.5.1",
+    "maquette": "git://github.com/AFASSoftware/maquette.git#master",
     "postcss": "^4.1.5",
     "postcss-nested": "^0.2.2",
+    "tsify": "^0.11.11",
+    "typescript": "^1.5.3",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   }
