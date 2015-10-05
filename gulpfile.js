@@ -12,7 +12,7 @@ var autoprefixer = require('autoprefixer-core');
 var postcss = require('gulp-postcss');
 var postcssNested = require('postcss-nested');
 var ghPages = require('gulp-gh-pages');
-var compactDom = require('compact-dom');
+var compactDom = require('gulp-compact-dom');
 var gulpCompactDom = require('gulp-compact-dom');
 var tsify = require('tsify');
 
@@ -22,6 +22,20 @@ var BROWSERSYNC_PORT = parseInt(process.env.PORT) || 1111;
 var BROWSERSYNC_HOST = process.env.IP || "127.0.0.1";
 
 gulp.task('clean', del.bind(null, ['./build']));
+
+gulp.task('definitions', function() {
+  var definitionsManager = compactDom.createTypescriptDefinitionsManager(
+    'compact-dom-definitions.d.ts',
+    'src/**/*.ts',
+    {}
+  );
+
+  gulp.src(definitionsManager.glob)
+    .pipe(definitionsManager.transform)
+    .pipe(gulp.dest("typings"));
+    
+  gulp.watch(definitionsManager.glob, definitionsManager.update);
+});
 
 gulp.task('css', function() {
   return gulp.src('web/**/*.css')
